@@ -1,0 +1,40 @@
+﻿// MathDSL.qw
+macro math(expression) {
+    // Simple RPN expression parser
+    let tokens = expression.split(" ")
+    var stack: [String] = []
+    for token in tokens {
+        match token {
+            "+" => {
+                let b = stack.pop()
+                let a = stack.pop()
+                stack.push("(\ + \)")
+            },
+            "-" => {
+                let b = stack.pop()
+                let a = stack.pop()
+                stack.push("(\ - \)")
+            },
+            "*" => {
+                let b = stack.pop()
+                let a = stack.pop()
+                stack.push("(\ * \)")
+            },
+            "/" => {
+                let b = stack.pop()
+                let a = stack.pop()
+                stack.push("(\ / \)")
+            },
+            _ => {
+                stack.push(token)
+            }
+        }
+    }
+    return stack.pop()
+}
+
+// Usage example
+func main() {
+    let result = math(""3 4 + 2 *"")
+    print(""Result: \(result)"") // Output: Result: 14
+}

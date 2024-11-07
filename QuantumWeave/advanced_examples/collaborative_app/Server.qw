@@ -1,0 +1,21 @@
+﻿// Server.qw
+actor Server {
+    var clients: Set<Client> = []
+    let document: SharedDocument = SharedDocument()
+
+    func connect(client: Client) {
+        clients.add(client)
+        client <- .initialize(documentState: document.getState())
+    }
+
+    func receiveEdit(edit: EditOperation, from client: Client) {
+        document.applyEdit(edit)
+        broadcastEdit(edit, excluding: client)
+    }
+
+    func broadcastEdit(edit: EditOperation, excluding client: Client) {
+        parallel for c in clients where c != client {
+            c <- .applyRemoteEdit(edit: edit)
+        }
+    }
+}

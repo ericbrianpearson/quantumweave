@@ -1,0 +1,17 @@
+﻿// Task.qw
+data class Task {
+    let data: Data
+
+    func compute() -> Result {
+        // Implement the computation logic
+        return Result()
+    }
+}
+
+class Result {
+    // Define the result structure
+}
+
+class Data {
+    // Define the data structure
+}

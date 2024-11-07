@@ -1,0 +1,29 @@
+﻿// MasterNode.qw
+actor MasterNode {
+    var workerNodes: Set<WorkerNode> = []
+    var taskQueue: Queue<Task> = Queue()
+
+    func registerWorker(worker: WorkerNode) {
+        workerNodes.add(worker)
+        distributeTasks()
+    }
+
+    func submitTask(task: Task) {
+        taskQueue.enqueue(task)
+        distributeTasks()
+    }
+
+    func distributeTasks() {
+        while !taskQueue.isEmpty && !workerNodes.isEmpty {
+            let task = taskQueue.dequeue()
+            let worker = workerNodes.first()
+            workerNodes.remove(worker)
+            worker <- .executeTask(task: task, callback: self)
+        }
+    }
+
+    func taskCompleted(worker: WorkerNode) {
+        workerNodes.add(worker)
+        distributeTasks()
+    }
+}

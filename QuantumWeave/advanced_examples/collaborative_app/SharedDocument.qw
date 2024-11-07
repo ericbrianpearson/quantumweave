@@ -1,0 +1,26 @@
+﻿// SharedDocument.qw
+class SharedDocument {
+    var state: DocumentState = DocumentState()
+
+    func applyEdit(edit: EditOperation) {
+        state.apply(edit)
+    }
+
+    func getState() -> DocumentState {
+        return state
+    }
+}
+
+class DocumentState {
+    var content: String = ""
+
+    func apply(edit: EditOperation) {
+        // Apply the edit operation to the content
+    }
+}
+
+data class EditOperation {
+    let position: Int
+    let insertedText: String
+    let deletedLength: Int
+}

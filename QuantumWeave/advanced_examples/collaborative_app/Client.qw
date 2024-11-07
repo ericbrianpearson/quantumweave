@@ -1,0 +1,20 @@
+﻿// Client.qw
+actor Client {
+    let server: Server
+    var documentState: DocumentState
+
+    func initialize(documentState: DocumentState) {
+        self.documentState = documentState
+        // Update the user interface
+    }
+
+    func localEdit(edit: EditOperation) {
+        documentState.apply(edit)
+        server <- .receiveEdit(edit: edit, from: self)
+    }
+
+    func applyRemoteEdit(edit: EditOperation) {
+        documentState.apply(edit)
+        // Update the user interface
+    }
+}

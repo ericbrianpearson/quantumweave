@@ -1,0 +1,23 @@
+﻿// LoggingPlugin.qw
+plugin LoggingPlugin {
+    func beforeFunctionCall(funcName: String, args: [Any]) {
+        print(""Entering \(funcName) with arguments: \(args)"")
+    }
+
+    func afterFunctionCall(funcName: String, result: Any) {
+        print(""Exiting \(funcName) with result: \(result)"")
+    }
+}
+
+// Usage example
+@LoggingPlugin
+func calculate(a: Int, b: Int) -> Int {
+    return a + b
+}
+
+func main() {
+    let sum = calculate(a: 5, b: 7)
+    // Output:
+    // Entering calculate with arguments: [5, 7]
+    // Exiting calculate with result: 12
+}

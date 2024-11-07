@@ -1,0 +1,9 @@
+﻿// WorkerNode.qw
+actor WorkerNode {
+    func executeTask(task: Task, callback: MasterNode) {
+        // Perform the computation
+        let result = task.compute()
+        // Handle the result as needed
+        callback <- .taskCompleted(worker: self)
+    }
+}
