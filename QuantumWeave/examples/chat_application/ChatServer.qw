@@ -1,0 +1,17 @@
+﻿// ChatServer.qw
+let chatRoom = ChatRoom()
+
+func handleNewConnection(connection: Connection) {
+    let username = connection.receive()
+    let user = ChatUser(username: username, connection: connection)
+    chatRoom <- .join(user: user)
+
+    while let message = connection.receive() {
+        chatRoom <- .broadcast(message: "[\\(username)]: \\(message)")
+    }
+
+    chatRoom <- .leave(user: user)
+}
+
+let server = TCPServer(port: 9090, connectionHandler: handleNewConnection)
+server.start()

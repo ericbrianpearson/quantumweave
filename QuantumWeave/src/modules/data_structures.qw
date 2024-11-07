@@ -1,0 +1,22 @@
+﻿// data_structures.qw
+data class Node<T> {
+    value: T
+    next: Node<T>?
+}
+
+class LinkedList<T> {
+    var head: Node<T>?
+
+    func append(value: T) {
+        let newNode = Node(value: value, next: nil)
+        if let lastNode = head {
+            var current = lastNode
+            while current.next != nil {
+                current = current.next!
+            }
+            current.next = newNode
+        } else {
+            head = newNode
+        }
+    }
+}

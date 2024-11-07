@@ -1,0 +1,14 @@
+﻿// ChatUser.qw
+actor ChatUser {
+    let username: String
+    let connection: Connection
+
+    init(username: String, connection: Connection) {
+        self.username = username
+        self.connection = connection
+    }
+
+    func receiveMessage(message: String) {
+        connection.send(message)
+    }
+}

@@ -1,0 +1,14 @@
+﻿// interoperability.qw
+// Interacting with a C library
+extern func cMultiply(a: Int32, b: Int32) -> Int32
+
+func multiplyNumbers(a: Int32, b: Int32) -> Int32 {
+    return cMultiply(a, b)
+}
+
+// Using a Java class
+import java.util.Date
+
+func getCurrentDate() -> Date {
+    return Date()
+}

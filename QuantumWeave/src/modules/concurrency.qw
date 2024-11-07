@@ -1,0 +1,13 @@
+﻿// concurrency.qw
+actor Worker {
+    func performTask(task: Task) {
+        // Task implementation
+    }
+}
+
+func runTasksConcurrently(tasks: [Task]) {
+    parallel for task in tasks {
+        let worker = Worker()
+        worker <- .performTask(task: task)
+    }
+}

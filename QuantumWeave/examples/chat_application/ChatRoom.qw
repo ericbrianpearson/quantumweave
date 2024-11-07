@@ -1,0 +1,20 @@
+﻿// ChatRoom.qw
+actor ChatRoom {
+    var users: Set<ChatUser> = []
+
+    func join(user: ChatUser) {
+        users.add(user)
+        broadcast("\\(user.username) has joined the chat.")
+    }
+
+    func leave(user: ChatUser) {
+        users.remove(user)
+        broadcast("\\(user.username) has left the chat.")
+    }
+
+    func broadcast(message: String) {
+        parallel for user in users {
+            user <- .receiveMessage(message: message)
+        }
+    }
+}

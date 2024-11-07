@@ -1,0 +1,5 @@
+﻿// main.qw
+func main() {
+    print("Welcome to QuantumWeave!")
+    // Additional code can go here
+}
